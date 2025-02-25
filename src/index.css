@@ -13,7 +13,7 @@ code {
 }
 
 .btn__skeleton {
-background-color: rgb(161, 64, 64);
-width: 10px;
-height: 10px;
+background-color: rgb(110, 105, 105) !important;
+width: 20px;
+height: 20px;
 }

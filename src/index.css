@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.btn__skeleton {
+background-color: rgb(161, 64, 64);
+width: 10px;
+height: 10px;
+}

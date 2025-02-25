@@ -1,7 +1,9 @@
-import './App.css';
 import React from 'react';
 import { auth } from './firebase/init'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import Skeleton from './Skeleton';
+
+
 function App() {
   const [user, setUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(true);
@@ -12,6 +14,10 @@ function App() {
       console.log(user);
       if (user) {
         setUser(user)
+        setIsLoggedin(true)
+      }
+      else {
+        setIsLoggedin(false)
       }
     }
     )
@@ -42,14 +48,16 @@ console.log(error);
   function logout() {
     signOut(auth);
     setUser({});
+    setIsLoggedin(false)
   }
   function loggedIn () {
     if (isLoggedin) {
-      return ( 
+      return (
         <>
         <button onClick={logout}>{user.email[0].toUpperCase()}</button>
         </>
       )
+      
     }
     else return (
       <>
@@ -57,12 +65,10 @@ console.log(error);
        <button onClick={login}>Login</button>
       </>
     )
-    
   }
   return (
     <div className="App">
-    {isLoading ? "loading" : <>  <button onClick={logout}>{user.email[0].toUpperCase()}</button></>}
-    {loggedIn()}
+    {isLoading ? <Skeleton /> : loggedIn() }
     </div>
   );
 }

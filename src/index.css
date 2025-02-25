@@ -13,7 +13,7 @@ code {
 }
 
 .btn__skeleton {
-background-color: rgb(110, 105, 105) !important;
+background-color: rgb(110, 105, 105); /*can also use !important instead of the set timeout*/
 width: 20px;
 height: 20px;
 }

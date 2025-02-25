@@ -1,17 +1,29 @@
 import React from 'react';
-import { auth } from './firebase/init'
+import { auth, db } from './firebase/init'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import Skeleton from './Skeleton';
+import { collection, addDoc } from "firebase/firestore"
 
 
 function App() {
+
+function createPost() {
+  const post = {
+    title: "land a 400k job",
+    description: "finish front end simplified"
+  };
+  addDoc(collection(db, "posts"), post)
+}
+
   const [user, setUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(true);
   const [isLoggedin, setIsLoggedin] = React. useState(false)
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      setIsLoading(false)
-      console.log(user);
+      setTimeout(() => {
+        setIsLoading(false)
+        console.log(user);
+      }, 2000);
       if (user) {
         setUser(user)
         setIsLoggedin(true)
@@ -68,7 +80,9 @@ console.log(error);
   }
   return (
     <div className="App">
+    <button onClick={createPost}>Create Post</button>
     {isLoading ? <Skeleton /> : loggedIn() }
+
     </div>
   );
 }
